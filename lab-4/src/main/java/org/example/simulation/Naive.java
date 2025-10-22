@@ -1,8 +1,9 @@
 package org.example.simulation;
 
-import org.example.models.Philosopher;
 import org.example.models.Philosophers.NaivePhilosopher;
 import org.example.models.Simulator;
+
+/// This is the simplest implementation, but can lead to deadlock.
 
 public class Naive {
     static void main(String args[]) {

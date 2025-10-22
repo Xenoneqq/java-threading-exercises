@@ -2,6 +2,7 @@ package org.example.models;
 
 public class Simulator {
     Philosopher[] philosophers;
+    public double simulationTime = 0;
 
     public Simulator(Philosopher[] philosophers) {
         this.philosophers = philosophers;
@@ -21,6 +22,8 @@ public class Simulator {
             philosophers[i].rightFork = forks[(i+1) % N];
         }
 
+        double startTime = System.currentTimeMillis();
+
         // Starting philosopher threads
         for (int i = 0; i < N; i++) {
             philosophers[i].start();
@@ -34,6 +37,8 @@ public class Simulator {
             }
         }
 
-        System.out.println("Simulation ended.");
+        double endTime = System.currentTimeMillis();
+        simulationTime = (endTime - startTime) / 1000.0;
+        System.out.println("Simulation ended with time of " + simulationTime + " seconds.");
     }
 }

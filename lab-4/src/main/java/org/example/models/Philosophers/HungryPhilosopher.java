@@ -9,9 +9,7 @@ public class HungryPhilosopher extends Philosopher {
         try {
             while (mealsToEat > 0) {
                 think();
-                float startTime = System.currentTimeMillis();
                 eat();
-                float endTime = System.currentTimeMillis();
             }
         } catch (InterruptedException e) {
             System.out.println("Philosopher " + id + " interrupted.");

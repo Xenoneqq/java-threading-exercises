@@ -2,7 +2,7 @@ package org.example.models.Philosophers;
 
 import org.example.models.Philosopher;
 
-public class NaivePhilosopher extends Philosopher {
+public class SymmetricPhilosopher extends Philosopher {
 
     @Override
     public void run() {
@@ -16,10 +16,15 @@ public class NaivePhilosopher extends Philosopher {
         }
     }
 
-    public void eat(){
-        getRightFork();
-        getLeftFork();
+    public void eat() throws InterruptedException {
+        if(id % 2 == 0){
+            getRightFork();
+            getLeftFork();
+        }
+        else{
+            getLeftFork();
+            getRightFork();
+        }
         Consume();
     }
-
 }

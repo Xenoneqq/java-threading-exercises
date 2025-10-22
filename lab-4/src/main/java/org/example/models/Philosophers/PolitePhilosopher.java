@@ -1,8 +1,15 @@
 package org.example.models.Philosophers;
 
 import org.example.models.Philosopher;
+import org.example.models.Waiter;
 
-public class NaivePhilosopher extends Philosopher {
+public class PolitePhilosopher extends Philosopher {
+
+    public Waiter waiter;
+
+    public PolitePhilosopher(Waiter waiter) {
+        this.waiter = waiter;
+    }
 
     @Override
     public void run() {
@@ -16,10 +23,11 @@ public class NaivePhilosopher extends Philosopher {
         }
     }
 
-    public void eat(){
+    public void eat() throws InterruptedException {
+        waiter.requestPermission();
         getRightFork();
         getLeftFork();
         Consume();
+        waiter.releasePermission();
     }
-
 }

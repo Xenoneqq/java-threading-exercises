@@ -1,9 +1,9 @@
 package org.example.simulation;
 
-import org.example.models.Philosopher;
 import org.example.models.Philosophers.HungryPhilosopher;
-import org.example.models.Philosophers.NaivePhilosopher;
 import org.example.models.Simulator;
+
+/// Usually it is the slowest.
 
 public class Hungry {
     static void main(String args[]) {
