@@ -6,28 +6,17 @@ import org.example.modules.Producer;
 
 public class Main {
     static void main() {
+
+        int peopleCount = 1;
+
         Buffer buf;
+        buf = new Buffer(5);
 
-        int operation = 0;
-
-        if(operation == 0) {
-            buf = new Buffer(10);
-            Producer p = new Producer(buf);
-            Consumer c = new Consumer(buf);
-
-            p.start();
-            c.start();
+        for (int i = 0; i < peopleCount; i++) {
+            new Producer(buf).start();
         }
-        else {
-
-            buf = new Buffer(5);
-
-            for (int i = 0; i < 3; i++) {
-                new Producer(buf).start();
-            }
-            for (int i = 0; i < 2; i++) {
-                new Consumer(buf).start();
-            }
+        for (int i = 0; i < peopleCount; i++) {
+            new Consumer(buf).start();
         }
     }
 }
