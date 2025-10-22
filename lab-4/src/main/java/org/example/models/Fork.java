@@ -2,13 +2,18 @@ package org.example.models;
 
 import java.util.concurrent.Semaphore;
 
-public class Fork extends Semaphore {
+public class Fork {
+    private final Semaphore semaphore = new Semaphore(1);
 
-    public Fork(int permits) {
-        super(permits);
+    public void acquire() throws InterruptedException {
+        semaphore.acquire();
     }
 
-    public Fork(int permits, boolean fair) {
-        super(permits, fair);
+    public void release() {
+        semaphore.release();
+    }
+
+    public boolean tryAcquire() {
+        return semaphore.tryAcquire();
     }
 }
