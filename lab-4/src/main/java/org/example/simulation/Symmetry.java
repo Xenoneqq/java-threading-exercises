@@ -4,24 +4,31 @@ import org.example.models.Simulator;
 
 /// This is usually the fastest approach. Prevents deadlock with smart fork picking rules.
 
-public class Symmetry {
-    public static boolean printStatus = true;
+public class Symmetry extends Thread {
+    public boolean printStatus = true;
+    public Simulator simulator;
 
-    static void main(String args[]) {
+    public static void main(String[] args) {
+        Symmetry symmetrySimulation = new Symmetry();
+        symmetrySimulation.runSimulation();
+    }
+
+    @Override
+    public void run() {
         runSimulation();
     }
 
-    static void setPrintStatus (boolean status) {
+    public void setPrintStatus (boolean status) {
         printStatus = status;
     }
 
-    static void runSimulation() {
+    public void runSimulation() {
         SymmetricPhilosopher[] philosophers = new SymmetricPhilosopher[5];
         for (int i = 0; i < 5; i++) {
             philosophers[i] = new SymmetricPhilosopher();
             philosophers[i].printState = printStatus;
         }
-        Simulator simulator = new Simulator(philosophers);
+        simulator = new Simulator(philosophers);
         simulator.start();
     }
 }

@@ -1,0 +1,17 @@
+Test results for 100 iterations
+
+Naive Simulation:
+Average Full Simulation Time: 7.393 s
+Average Wait Time: 523.269 ms
+
+Hungry Simulation:
+Average Full Simulation Time: 9.699 s
+Average Wait Time: 507.756 ms
+
+Polite Simulation:
+Average Full Simulation Time: 7.456 s
+Average Wait Time: 525.833 ms
+
+Symmetry Simulation:
+Average Full Simulation Time: 7.483 s
+Average Wait Time: 527.279 ms

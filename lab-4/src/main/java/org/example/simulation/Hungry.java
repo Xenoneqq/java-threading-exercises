@@ -5,24 +5,31 @@ import org.example.models.Simulator;
 
 /// Usually it is the slowest.
 
-public class Hungry {
-    public static boolean printStatus = true;
+public class Hungry extends Thread{
+    public boolean printStatus = true;
+    public Simulator simulator;
 
-    static void main(String args[]) {
+    public static void main(String[] args) {
+        Hungry hungrySimulation = new Hungry();
+        hungrySimulation.runSimulation();
+    }
+
+    @Override
+    public void run() {
         runSimulation();
     }
 
-    static void setPrintStatus (boolean status) {
+    public void setPrintStatus (boolean status) {
         printStatus = status;
     }
 
-    static void runSimulation() {
+    public void runSimulation() {
         HungryPhilosopher[] philosophers = new HungryPhilosopher[5];
         for (int i = 0; i < 5; i++) {
             philosophers[i] = new HungryPhilosopher();
             philosophers[i].printState = printStatus;
         }
-        Simulator simulator = new Simulator(philosophers);
+        simulator = new Simulator(philosophers);
         simulator.start();
     }
 }
