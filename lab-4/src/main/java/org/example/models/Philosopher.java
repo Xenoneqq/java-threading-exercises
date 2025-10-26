@@ -6,17 +6,21 @@ public class Philosopher extends Thread {
     public static int globalID = 0;
     public int id;
     public int mealsToEat = 10;
+    public boolean printState = true;
 
     public Fork leftFork, rightFork;
     public boolean leftForkObtained = false;
     public boolean rightForkObtained = false;
 
+    public ArrayList<Double> waitingTimes = new ArrayList<Double>();
+    public double startTime = 0.0;
+    public double endTime = 0.0;
     public Philosopher() {
         id = globalID++;
     }
 
     public void think() throws InterruptedException {
-        System.out.println("Philosopher " + id + " is thinking...");
+        if(printState) System.out.println("Philosopher " + id + " is thinking...");
         Thread.sleep((int) (Math.random() * 1000));
     }
 
@@ -24,7 +28,7 @@ public class Philosopher extends Thread {
         try {
             leftFork.acquire();
             leftForkObtained = true;
-            System.out.println("Philosopher " + id + " obtained left fork.");
+            if(printState) System.out.println("Philosopher " + id + " obtained left fork.");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -34,7 +38,7 @@ public class Philosopher extends Thread {
         try {
             rightFork.acquire();
             rightForkObtained = true;
-            System.out.println("Philosopher " + id + " obtained right fork.");
+            if(printState) System.out.println("Philosopher " + id + " obtained right fork.");
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -43,9 +47,9 @@ public class Philosopher extends Thread {
     public void Consume() {
         try {
             if (leftForkObtained && rightForkObtained) {
-                System.out.println("Philosopher " + id + " is consuming.");
+                if(printState) System.out.println("Philosopher " + id + " is consuming.");
                 Thread.sleep(100);
-                System.out.println("Philosopher " + id + " has finished consuming.");
+                if(printState) System.out.println("Philosopher " + id + " has finished consuming.");
                 mealsToEat--;
                 leftForkObtained = false;
                 rightForkObtained = false;

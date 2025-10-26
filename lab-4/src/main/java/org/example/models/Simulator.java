@@ -3,6 +3,7 @@ package org.example.models;
 public class Simulator {
     Philosopher[] philosophers;
     public double simulationTime = 0;
+    public boolean printPhilosopherStates = true;
 
     public Simulator(Philosopher[] philosophers) {
         this.philosophers = philosophers;
@@ -40,5 +41,18 @@ public class Simulator {
         double endTime = System.currentTimeMillis();
         simulationTime = (endTime - startTime) / 1000.0;
         System.out.println("Simulation ended with time of " + simulationTime + " seconds.");
+
+        double averagePhilosopherWaitingTime = 0.0;
+        for(int i = 0; i < philosophers.length; i++) {
+            double totalWaitingTime = 0.0;
+            for(int j = 0; j < philosophers[i].waitingTimes.size(); j++) {
+                totalWaitingTime += philosophers[i].waitingTimes.get(j);
+            }
+            double averageWaitingTime = totalWaitingTime / philosophers[i].waitingTimes.size();
+            averagePhilosopherWaitingTime += averageWaitingTime;
+        }
+        averagePhilosopherWaitingTime /= philosophers.length;
+        double avgTime = Math.round(averagePhilosopherWaitingTime * 1000.0) / 1000.0;
+        System.out.println("Average philosopher waiting time: " + avgTime + " ms.");
     }
 }

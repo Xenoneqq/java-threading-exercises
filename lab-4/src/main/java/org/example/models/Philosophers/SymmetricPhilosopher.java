@@ -8,6 +8,7 @@ public class SymmetricPhilosopher extends Philosopher {
     public void run() {
         try {
             while (mealsToEat > 0) {
+                startTime = System.currentTimeMillis();
                 think();
                 eat();
             }
@@ -25,6 +26,8 @@ public class SymmetricPhilosopher extends Philosopher {
             getLeftFork();
             getRightFork();
         }
+        endTime = System.currentTimeMillis();
+        waitingTimes.add(endTime - startTime);
         Consume();
     }
 }

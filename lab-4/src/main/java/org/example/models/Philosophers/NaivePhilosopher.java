@@ -8,6 +8,7 @@ public class NaivePhilosopher extends Philosopher {
     public void run() {
         try {
             while (mealsToEat > 0) {
+                startTime = System.currentTimeMillis();
                 think();
                 eat();
             }
@@ -19,6 +20,8 @@ public class NaivePhilosopher extends Philosopher {
     public void eat(){
         getRightFork();
         getLeftFork();
+        endTime = System.currentTimeMillis();
+        waitingTimes.add(endTime - startTime);
         Consume();
     }
 
