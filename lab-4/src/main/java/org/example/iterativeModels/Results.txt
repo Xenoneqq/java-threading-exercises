@@ -1,4 +1,4 @@
-Test results for 100 iterations
+Test results for 10000 iterations
 
 Naive Simulation:
 Average Full Simulation Time: 7.393 s
@@ -6,7 +6,7 @@ Average Wait Time: 523.269 ms
 
 Hungry Simulation:
 Average Full Simulation Time: 9.699 s
-Average Wait Time: 507.756 ms
+Average Wait Time: 663.964 ms
 
 Polite Simulation:
 Average Full Simulation Time: 7.456 s

@@ -3,11 +3,17 @@ package org.example.models.Philosophers;
 import org.example.models.Philosopher;
 
 public class HungryPhilosopher extends Philosopher {
+
+    private boolean obtainedBothForks = true;
+
     @Override
     public void run() {
         try {
             while (mealsToEat > 0) {
-                startTime = System.currentTimeMillis();
+                if(obtainedBothForks) {
+                    startTime = System.currentTimeMillis();
+                    obtainedBothForks = false;
+                }
                 think();
                 eat();
             }
@@ -20,6 +26,7 @@ public class HungryPhilosopher extends Philosopher {
         if((leftForkObtained = leftFork.tryAcquire()) && (rightForkObtained = rightFork.tryAcquire())){
             endTime = System.currentTimeMillis();
             waitingTimes.add(endTime - startTime);
+            obtainedBothForks = true;
             Consume();
         }
         else{
