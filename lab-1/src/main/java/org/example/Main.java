@@ -13,9 +13,9 @@ public class Main {
         simulation2.Start();
         simulation2.PrintDebugInformation();
 
-//        // DOES NOT STOP PROGRAM USE AT YOUR OWN RISK!
-//        MaxThreadsTest maxThreadsTest = new MaxThreadsTest();
-//        maxThreadsTest.Start();
+        // DOES NOT STOP PROGRAM USE AT YOUR OWN RISK!
+        MaxThreadsTest maxThreadsTest = new MaxThreadsTest();
+        maxThreadsTest.Start();
 
     }
 }
