@@ -12,9 +12,16 @@ public class Runner {
         System.out.println("Initial matrix:");
         System.out.println(matrix.toString());
         System.out.println(" - === - === - === -\n");
+
+        double startTime = System.nanoTime();
         GaussElimination.Gauss(matrix);
+        double endTime = System.nanoTime();
+
         System.out.println("Matrix after Gauss elimination:");
         System.out.println(matrix.toString());
+        double ms = (endTime - startTime) / 1_000_000.0;
+
+        System.out.printf("Czas: %.3f ms%n", ms);
     }
 
 

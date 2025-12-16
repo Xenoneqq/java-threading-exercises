@@ -273,3 +273,21 @@ $$E = D$$
     ```
 
 Graf Diekerta $G_D$ jest grafem oznaczonym, a ślad $t$ jest zbiorem wszystkich ciągów symboli, które są poprawnymi ścieżkami w tym grafie (lub równoważnymi ciągowi $w$ poprzez zamianę niezależnych symboli).
+
+Poniżej znajduje się wygenerowany graf Diekerta dla **macierzy 4x4**
+
+![Graf Diekerta](./assets/Graf%20Diekerta.png)
+
+# Implementacja
+
+Zadanie zostało wykonane z wykorzystaniem `Java - Gradle 25`
+
+Znajduje się ono w folderze `elimination`
+
+## Uruchamianie
+
+1. Określ path do pliku wejściowego (pliki znajdują się w folderze `data`)
+
+2. Uruchom skrypt `Runner`
+
+3. Macierz po eliminacji Gaussa zostanie wyświetlona na standardowym wyjściu.
