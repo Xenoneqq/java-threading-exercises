@@ -5,20 +5,18 @@ import java.nio.file.*;
 
 public class MatrixReader {
     public static Matrix readMatrix(String input) {
-        String[] lines = input.trim().split("\n");
-        String[] dimensions = lines[0].trim().split(" ");
-        String sizeXText = dimensions[0];
-        int size = Integer.parseInt(sizeXText);
-
-        Matrix matrix = new Matrix(size, size+1);
-
-        for (int i = 0; i < matrix.getY(); i++) {
-            String[] valuesText = lines[i + 1].trim().split(" ");
-            for (int j = 0; j < matrix.getX(); j++) {
-                String valueText = valuesText[j];
-                float value = Float.parseFloat(valueText);
-                matrix.setValue(j, i, value);
+        String[] lines = input.trim().split("\\s*\\n\\s*");
+        int size = Integer.parseInt(lines[0].trim());
+        Matrix matrix = new Matrix(size, size + 1);
+        for (int i = 0; i < size; i++) {
+            String[] valuesText = lines[i + 1].trim().split("\\s+");
+            for (int j = 0; j < size; j++) {
+                matrix.setValue(i, j, Float.parseFloat(valuesText[j]));
             }
+        }
+        String[] resultsText = lines[size + 1].trim().split("\\s+");
+        for (int i = 0; i < size; i++) {
+            matrix.setValue(i, size, Float.parseFloat(resultsText[i]));
         }
 
         return matrix;

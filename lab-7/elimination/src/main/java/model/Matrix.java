@@ -6,6 +6,8 @@ public class Matrix {
     private int y;
     private float[][] matrix;
 
+    double epsilon = 1e-6;
+
 
     public Matrix(int x, int y) {
         this.x = x;
@@ -14,7 +16,11 @@ public class Matrix {
     }
 
     public void setValue(int x, int y, float value) {
-        this.matrix[x][y] = value;
+        if (Math.abs(value) < epsilon) {
+            this.matrix[x][y] = 0.0f;
+        } else {
+            this.matrix[x][y] = value;
+        }
     }
 
     public float getValue(int x, int y) {
