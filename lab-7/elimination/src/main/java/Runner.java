@@ -4,7 +4,6 @@ import reader.MatrixReader;
 
 public class Runner {
 
-
     public static void main(String[] args) {
         String path = "data/data_in.txt";
         Matrix matrix = MatrixReader.readMatrixFromFile(path);
@@ -15,6 +14,8 @@ public class Runner {
 
         double startTime = System.nanoTime();
         GaussElimination.Gauss(matrix);
+        GaussElimination.Normalize(matrix);
+        GaussElimination.BackwardElimination(matrix);
         double endTime = System.nanoTime();
 
         System.out.println("Matrix after Gauss elimination:");
@@ -23,6 +24,4 @@ public class Runner {
 
         System.out.printf("Czas: %.3f ms%n", ms);
     }
-
-
 }
