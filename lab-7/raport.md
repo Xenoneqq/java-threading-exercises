@@ -18,11 +18,11 @@ Znaleznienie mnożnika wiersza `i` dla odejmowanego wiersza `k`
 
 Pomnożenie elementu `j` w wierszu `i` przez mnożnik, aby później wykorzystać go w odejmowaniu dla kroku `k`
 
-**$n(k,i) = M(i,j) \cdot m(k,i)$**
+**$n(k,i,j) = M(i,j) \cdot m(k,i)$**
 
 - **C(i, j, k)**
 
-Odjęcie pomnożonej w operacji `B` wartości dla elementu `j` w wierszu `k` na pozycji `j`.
+Odjęcie wartości $n(k,i,j)$ od elementu $M(k,j)$
 
 **$M(k,j) = M(k,j) - n(k,i)$**
 
@@ -167,7 +167,7 @@ Wartość $M(i,j)$ musi zostać zaktualizowana zanim zostanie użyta do mnożeni
 ```
 ∀i ∈ {2 ... N}
 ∀j ∈ {i ... N}
-∀k ∈ {i ... N}
+∀k ∈ {i + 1 ... N}
 
 -   (C(i-1,j,i), B(i,j,k) ) ∈ D
 ```
@@ -277,6 +277,30 @@ Graf Diekerta $G_D$ jest grafem oznaczonym, a ślad $t$ jest zbiorem wszystkich 
 Poniżej znajduje się wygenerowany graf Diekerta dla **macierzy 4x4**
 
 ![Graf Diekerta](./assets/Graf%20Diekerta.png)
+
+### Program do generowania grafu Diekerta
+
+W katalogu `visualization` znajduje się program użyty do wygenerowania grafów zależności operacji dla algorytmu eliminacji Gaussa.
+
+#### Wymagania
+Program wymaga środowiska Python 3 oraz instalacji poniższych bibliotek:
+
+```bash
+pip install networkx matplotlib
+```
+
+#### Uruchomienie
+
+Aby wygenerować graf, należy przejść do katalogu z programem i wykonać komendę:
+
+```bash
+python visualization/graph.py [N]
+```
+
+#### Parametry
+
+* **N** – określa rozmiar macierzy, dla której rozrysowujemy operacje (domyślnie: **4**).
+* **Ograniczenia** – maksymalna wartość parametru wynosi **8** (powyżej tej wartości graf staje się nieczytelny).
 
 # Implementacja
 
