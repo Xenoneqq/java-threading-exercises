@@ -22,9 +22,33 @@ public class GaussElimination {
                     return;
                 }
             }
-
         }
-
     }
 
+    public static void BackwardElimination(Matrix matrix) {
+        int n = matrix.getX();
+        for (int i = n - 1; i >= 0; i--) {
+            float pivot = matrix.getValue(i, i);
+            if (Math.abs(pivot) < 1e-10) continue;
+            for (int k = i - 1; k >= 0; k--) {
+                float multiplier = matrix.getValue(k, i) / pivot;
+                for (int j = i; j < matrix.getY(); j++) {
+                    float value = matrix.getValue(k, j) - multiplier * matrix.getValue(i, j);
+                    matrix.setValue(k, j, value);
+                }
+            }
+        }
+    }
+
+    public static void Normalize(Matrix matrix) {
+        int n = matrix.getX();
+        for (int i = 0; i < n; i++) {
+            float diag = matrix.getValue(i, i);
+            if (Math.abs(diag) > 1e-10) {
+                for (int j = i; j < matrix.getY(); j++) {
+                    matrix.setValue(i, j, matrix.getValue(i, j) / diag);
+                }
+            }
+        }
+    }
 }
