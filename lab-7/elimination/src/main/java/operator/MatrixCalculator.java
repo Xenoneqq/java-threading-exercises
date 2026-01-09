@@ -9,8 +9,8 @@ public class MatrixCalculator {
     }
 
     // OPERATION B
-    public static float GetMultiplication(int i, int j, float mutliplier, Matrix matrix){
-        return matrix.getValue(i,j) * mutliplier;
+    public static float GetMultiplication(int i, int j, float multiplier, Matrix matrix){
+        return matrix.getValue(i,j) * multiplier;
     }
 
     // OPERATION C

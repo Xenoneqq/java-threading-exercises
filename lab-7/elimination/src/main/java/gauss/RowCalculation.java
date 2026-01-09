@@ -3,12 +3,12 @@ package gauss;
 import model.Matrix;
 import operator.MatrixCalculator;
 
-public class RawCalculation extends Thread{
+public class RowCalculation extends Thread{
 
     private Matrix matrix;
     private int i, k;
 
-    public RawCalculation(Matrix matrix, int i, int k) {
+    public RowCalculation(Matrix matrix, int i, int k) {
         this.matrix = matrix;
         this.i = i;
         this.k = k;

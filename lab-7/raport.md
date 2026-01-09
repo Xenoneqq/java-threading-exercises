@@ -1,5 +1,11 @@
 # Zadanie 7
 
+## Wprowadzenie
+
+Celem zadania jest teoretyczna i praktyczna analiza algorytmu eliminacji Gaussa z perspektywy teorii współbieżności. W części teoretycznej algorytm zostanie opisany za pomocą niepodzielnych czynności, alfabetu teorii śladów, relacji zależności, grafu Diekerta oraz postaci normalnej Foaty. Na tej podstawie zaprojektowany zostanie współbieżny wariant eliminacji Gaussa, którego implementacja odwzorowuje wynikające zależności i umożliwia równoległe wykonanie obliczeń dla macierzy o rozmiarze $N$.
+
+---
+
 ## 1. Zdefiniowanie podstawowych niepodzielnych zadań obliczeniowych
 
 Krokiem pierwszym jest rozpoznanie i nazwanie pojedyńczych operacji jakie zachodzą w algorytmie eliminacji Gaussa.
@@ -218,69 +224,20 @@ F(3i)   = { C(i, j, k) | k ∈ {i+1 ... N}, j ∈ {i ... N+1} }
 
 ---
 
-## 5. Graf Zależności Diekerta $G_D$ dla $NxN$
+## 5. Graf Zależności Diekerta $G_D$
 
-Graf Diekerta $G_D$ jest grafem skierowanym, który reprezentuje porządek częściowy wymuszony przez relację zależności $D$ algorytmu eliminacji Gaussa.
+Na podstawie wcześniej zdefiniowanego alfabetu $Σ$ oraz relacji zależności $D$ skonstruowano graf zależności Diekerta $G_D$. Wierzchołkami grafu są niepodzielne operacje algorytmu eliminacji Gaussa, natomiast krawędzie reprezentują zależności danych pomiędzy tymi operacjami.
 
-$$G_D = (Σ, E)$$
+Graf Diekerta obrazuje porządek częściowy wykonywania obliczeń oraz wskazuje, które operacje mogą być realizowane współbieżnie. Dodatkowo zastosowano kolorowanie wierzchołków w celu zaznaczenia klas Foaty.
 
-### 5.1. Zbiór Wierzchołków ($Σ$)
+Poniżej przedstawiono graf Diekerta dla macierzy o rozmiarze `4 x 4`.
 
-Zbiór wierzchołków $G_D$ jest tożsamy z **Alfabetem** $Σ$ (zgodnie z sekcją 2), zawierającym wszystkie niepodzielne zadania $A, B, C$.
-
-$$Σ = \{ A_{i, k} \} ∪ \{ B_{i, j, k} \} ∪ \{ C_{i, j, k} \}$$
-
-```markdown
-// Warunki indeksów definiujące wierzchołki:
-∀i ∈ {1 ... N-1}, k ∈ {i+1 ... N}, j ∈ {i ... N+1}
-```
-
-### 5.2. Zbiór Krawędzi ($E$)
-
-Zbiór krawędzi $E$ jest tożsamy z **minimalną, nieprzechodnią relacją zależności** $D$ (zgodnie z sekcją 3). Krawędź istnieje tylko, jeśli występuje bezpośredni konflikt danych.
-
-$$E = D$$
-
-#### Generator Krawędzi $E$:
-
-1.  **Zależności Wewnętrzne ($A ➜ B, B ➜ C$):**
-
-    ```
-    // A ➜ B
-    ∀i ∈ {1 ... N-1}, k ∈ {i+1 ... N}, j ∈ {i ... N+1}: 
-    ( A(i,k), B(i,j,k) ) ∈ E
-
-    // B ➜ C
-    ∀i ∈ {1 ... N-1}, k ∈ {i+1 ... N}, j ∈ {i ... N+1}: 
-    ( B(i,j,k), C(i,j,k) ) ∈ E
-    ```
-
-2.  **Zależności Międzyetapowe ($C_{i-1} ➜ ...$):**
-
-    ```
-    // C(i-1) ➜ A(i)
-    ∀i ∈ {2 ... N-1}, k ∈ {i+1 ... N}:
-    -   ( C(i-1,i,i), A(i,k) ) ∈ E
-    -   ( C(i-1,i,k), A(i,k) ) ∈ E
-
-    // C(i-1) ➜ C(i)
-    ∀i ∈ {2 ... N-1}, j ∈ {i ... N+1}, k ∈ {i+1 ... N}:
-    -   ( C(i-1,j,k), C(i,j,k) ) ∈ E
-
-    // C(i-1) ➜ B(i)
-    ∀i ∈ {2 ... N-1}, j ∈ {i ... N+1}, k ∈ {i+1 ... N}:
-    -   (C(i-1,j,i), B(i,j,k) ) ∈ E
-    ```
-
-Graf Diekerta $G_D$ jest grafem oznaczonym, a ślad $t$ jest zbiorem wszystkich ciągów symboli, które są poprawnymi ścieżkami w tym grafie (lub równoważnymi ciągowi $w$ poprzez zamianę niezależnych symboli).
-
-Poniżej znajduje się wygenerowany graf Diekerta dla **macierzy 4x4**
 
 ![Graf Diekerta](./assets/Graf%20Diekerta.png)
 
 ### Program do generowania grafu Diekerta
 
-W katalogu `visualization` znajduje się program użyty do wygenerowania grafów zależności operacji dla algorytmu eliminacji Gaussa.
+W katalogu `visualization` znajduje się program użyty do wygenerowania powyższego grafu zależności operacji dla algorytmu eliminacji Gaussa.
 
 #### Wymagania
 Program wymaga środowiska Python 3 oraz instalacji poniższych bibliotek:
